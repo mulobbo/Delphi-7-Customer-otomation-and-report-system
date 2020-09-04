@@ -1,0 +1,120 @@
+unit Unit2;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ADODB, Grids, DBGrids, ComCtrls,
+  RpCon, RpConDS, RpDefine, RpRave, RpBase, RpSystem;
+
+type
+  TForm2 = class(TForm)
+    GroupBox1: TGroupBox;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    BitBtn1: TBitBtn;
+    Panel2: TPanel;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    DataSource1: TDataSource;
+    DBGrid1: TDBGrid;
+    ADOQuery1: TADOQuery;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    RvProject1: TRvProject;
+    RvProject2: TRvProject;
+    RvProject3: TRvProject;
+    RvProject4: TRvProject;
+    RvDataSetConnection1: TRvDataSetConnection;
+    RvDataSetConnection2: TRvDataSetConnection;
+    RvDataSetConnection3: TRvDataSetConnection;
+    RvDataSetConnection4: TRvDataSetConnection;
+    procedure CheckBox1Click(Sender: TObject);
+    procedure CheckBox2Click(Sender: TObject);
+    procedure CheckBox3Click(Sender: TObject);
+    procedure CheckBox4Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.dfm}
+
+uses unit1, Math;
+
+procedure TForm2.CheckBox1Click(Sender: TObject);
+begin
+if CheckBox1.Checked  then
+checkbox2.checked:=false ;
+checkbox3.checked:=false;
+checkbox4.checked:=false ;
+end;
+
+procedure TForm2.CheckBox2Click(Sender: TObject);
+begin
+if CheckBox2.Checked  then
+checkbox1.checked:=false ;
+checkbox3.checked:=false;
+checkbox4.checked:=false ;
+end;
+
+procedure TForm2.CheckBox3Click(Sender: TObject);
+begin
+if CheckBox3.Checked  then
+checkbox1.checked:=false ;
+checkbox2.checked:=false;
+checkbox4.checked:=false ;
+end;
+
+procedure TForm2.CheckBox4Click(Sender: TObject);
+begin
+if CheckBox4.Checked  then
+checkbox1.checked:=false ;
+checkbox2.checked:=false;
+checkbox3.checked:=false ;
+end;
+
+procedure TForm2.BitBtn1Click(Sender: TObject);
+begin
+if CheckBox1.Checked then begin
+
+with ADOQuery1 do //diðerlerinin filtreden etkilenmemesi için adoquery2 den çekiyoruz filtreli kayýtlarý
+begin
+close;
+sql.Text:=  'select * from musteriler where YUKLEME_TARIHI between "'+datetostr(dateTimePicker1.date)+'"and"'+datetostr(dateTimePicker2.date)+'" order by TOPLAM_BORC  asc' ;
+open;
+end;
+
+RvProject1.execute;
+
+end;
+
+If checkbox2.Checked then begin
+ShowMessage('2');
+end;
+
+If checkbox3.Checked then begin
+ShowMessage('3');
+end;
+
+If checkbox4.Checked then begin
+ShowMessage('4');
+end;
+
+end;
+
+
+
+
+
+end.
